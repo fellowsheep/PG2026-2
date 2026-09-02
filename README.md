@@ -26,27 +26,11 @@ Este repositório contém exemplos e códigos utilizados na disciplina de **Proc
 ├── 📄 ...
 ```
 
-Siga as instruções detalhadas em [GettingStarted.md](GettingStarted.md) para configurar e compilar o projeto.
-
-## ⚠️ **IMPORTANTE: Baixar a GLAD Manualmente**
-Para que o projeto funcione corretamente, pode ser necessário **baixar a GLAD manualmente** utilizando o **GLAD Generator**.
-
-### 🔗 **Acesse o web service do GLAD**:
-👉 [GLAD Generator](https://glad.dav1d.de/)
-
 ### ⚙️ **Configuração necessária:**
 - **API:** OpenGL  
-- **Version:** 3.3+ (ou superior compatível com sua máquina)  
-- **Profile:** Core  
+- **Version:** 4.6
+- **Profile:** Compatibility  
 - **Language:** C/C++  
-
-### 📥 **Baixe e extraia os arquivos:**
-Após a geração, extraia os arquivos baixados e coloque-os nos diretórios correspondentes:
-- Copie **`glad.h`** para `include/glad/`
-- Copie **`khrplatform.h`** para `include/glad/KHR/`
-- Copie **`glad.c`** para `common/`
-
-🚨 **Sem esses arquivos, a compilação falhará!** É necessário colocar esses arquivos nos diretórios corretos, conforme a orientação acima.
 
 ---
 
@@ -89,9 +73,3 @@ Recomendamos que você crie um repositório próprio, estruturado com subdiretó
 ├── 📄 CMakeLists.txt
 └── 📄 README.md
 ```
-> Você pode alterar a estrutura dos diretórios, mas sempre que o fizer, adicione-os corretamente no CMakelists.txt.
-> Cada diretório dentro de `src/` pode conter um arquivo `README.md` com informações específicas sobre a atividade ou exercício implementado.
-
-Consulte os seguintes materiais para ajuda adicional:
-- [Exemplo de README.md de repositório](misc/Template_README_Repositorio.md)
-- [Exemplo de README.md para cada projeto](misc/Template_README_Projeto.md)
