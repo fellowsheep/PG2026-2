@@ -42,8 +42,10 @@ include_directories(${stb_image_SOURCE_DIR})
 # OBS.: Não pode ter acentos ou caracteres especiais
 set(EXERCISES
     Exemplos/HelloTriangle
+    Exemplos/HelloOrtho
     Exercicios/Lista1/1
     Exercicios/Lista1/3
+
 )
 
 add_compile_options(-Wno-pragmas)
