@@ -43,6 +43,7 @@ include_directories(${stb_image_SOURCE_DIR})
 set(EXERCISES
     Exemplos/HelloTriangle
     Exemplos/HelloOrtho
+    Exemplos/HelloTransforms
     Exercicios/Lista1/1
     Exercicios/Lista1/3
 
