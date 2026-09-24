@@ -44,6 +44,8 @@ set(EXERCISES
     Exemplos/HelloTriangle
     Exemplos/HelloOrtho
     Exemplos/HelloTransforms
+    Exemplos/HelloTextures
+    Exemplos/HelloSprites
     Exercicios/Lista1/1
     Exercicios/Lista1/3
     Exercicios/Lista2/6
