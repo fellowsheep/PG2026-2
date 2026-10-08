@@ -89,6 +89,5 @@ foreach(EXERCISE ${EXERCISES})
     # Configura includes e bibliotecas
     target_include_directories(${EXE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include/glad ${glm_SOURCE_DIR} ${stb_image_SOURCE_DIR})
 
-
     target_link_libraries(${EXE_NAME} glfw ${OPENGL_LIBS} glm::glm )
 endforeach()

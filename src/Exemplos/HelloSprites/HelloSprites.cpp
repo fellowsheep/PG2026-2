@@ -46,6 +46,9 @@ using namespace std;
 
 using namespace glm;
 
+// Classe Sprite
+#include "Sprite.h"
+
 // Protótipo da função de callback de teclado
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 
@@ -135,21 +138,19 @@ int main()
 	cout << "Renderer: " << renderer << endl;
 	cout << "OpenGL version supported " << version << endl;
 
-	
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_ALWAYS);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
 	//Exercicio 3 da Lista 2
 	//glViewport(400, 100, 400, 300);
 
 	
 	// Compilando e buildando o programa de shader
 	GLuint shaderID = setupShader();
-
-	// Gerando um buffer simples, com a geometria de um triângulo
-	GLuint VAO = setupGeometry();
-
-	// Enviando a cor desejada (vec4) para o fragment shader
-	// Utilizamos a variáveis do tipo uniform em GLSL para armazenar esse tipo de info
-	// que não está nos buffers
-	GLint colorLoc = glGetUniformLocation(shaderID, "inputColor");
 
 	glUseProgram(shaderID); // Reseta o estado do shader para evitar problemas futuros
 
@@ -168,7 +169,7 @@ int main()
 
 	// Fazer o carregamento de uma img de textura
 	//GLint texID = loadTexture("../assets/tex/Bricks_1k.png");
-	GLint texID = loadTexture("../assets/sprites/pipo-nekonin022.png");
+	GLuint texID = loadTexture("../assets/sprites/pipo-nekonin022.png");
 
 	// Enviar/Registrar no shader a variável que vai ter o buffer da tex carregada
 	glUniform1i(glGetUniformLocation(shaderID,"texBuffer"),0);
@@ -177,6 +178,14 @@ int main()
 	glActiveTexture(GL_TEXTURE0);
 
 	float angle = 0.0;
+
+
+	Sprite *player = new Sprite;
+	player->inicializar(texID,&shaderID,vec3(400.0,100.0,0.0), vec3(64.0,64.0,1.0),4,3);
+
+	texID = loadTexture("../assets/backgrounds/City3.png");
+	Sprite *background = new Sprite(texID,&shaderID,vec3(400.0,300.0,0.0), vec3(1920.0/2,1080.0/2,1.0));
+
 	// Loop da aplicação - "game loop"
 	while (!glfwWindowShouldClose(window))
 	{
@@ -211,35 +220,20 @@ int main()
 
 		// Limpa o buffer de cor
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // cor de fundo
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glLineWidth(10);
 		glPointSize(20);
 
-		glBindVertexArray(VAO); // Conectando ao buffer de geometria
-		glBindTexture(GL_TEXTURE_2D, texID);
-		glUniform4f(colorLoc, 0.0f, 0.0f, 1.0f, 1.0f); // enviando cor para variável uniform inputColor
-
-	//Matriz de transformações do objeto (triângulo) - model matrix
-	mat4 model = mat4(1); // matriz identidade
-	angle = glfwGetTime();
-	model = translate(model, vec3(400.0, 300.0, 0.0));
-	//model = rotate(model, angle,vec3(0.0,0.0,1.0));
-	model = scale(model,vec3(400.0,400.0,1.0));
-	GLint modelLoc = glGetUniformLocation(shaderID,"model");
-	glUniformMatrix4fv(modelLoc,1,GL_FALSE,value_ptr(model));
-
-		// Chamada de desenho - drawcall
-		// GL_TRIANGLE_STRIP
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		background->desenhar();
+		player->desenhar();
 
 		// glBindVertexArray(0); // Desnecessário aqui, pois não há múltiplos VAOs
 
 		// Troca os buffers da tela
 		glfwSwapBuffers(window);
 	}
-	// Pede pra OpenGL desalocar os buffers
-	glDeleteVertexArrays(1, &VAO);
+
 	// Finaliza a execução da GLFW, limpando os recursos alocados por ela
 	glfwTerminate();
 	return 0;
