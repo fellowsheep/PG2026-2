@@ -41,11 +41,12 @@ include_directories(${stb_image_SOURCE_DIR})
 # Lista de exercícios/projetos (um diretório para cada)
 # OBS.: Não pode ter acentos ou caracteres especiais
 set(EXERCISES
-    Exemplos/HelloTriangle
-    Exemplos/HelloOrtho
-    Exemplos/HelloTransforms
-    Exemplos/HelloTextures
-    Exemplos/HelloSprites
+    ExemplosOpenGL/HelloTriangle
+    ExemplosOpenGL/HelloOrtho
+    ExemplosOpenGL/HelloTransforms
+    ExemplosOpenGL/HelloTextures
+    ExemplosOpenGL/HelloSprites
+    ExemplosOpenGL/HelloPixels
     Exercicios/Lista1/1
     Exercicios/Lista1/3
     Exercicios/Lista2/6
