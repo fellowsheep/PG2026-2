@@ -14,7 +14,7 @@ def main():
 
     while True:
         opcao = menu()
-
+        cv.destroyAllWindows()
         if opcao == '1':
             # faz o que precisa pra realizar a acao 1
             pass
@@ -23,6 +23,7 @@ def main():
             pass
         # ...
         else:
+            cv.imshow('Imagem Original', img)
             pass
 
         # ATENÇÃO ALUNOS: Esta linha é vital para o OpenCV processar a renderização
