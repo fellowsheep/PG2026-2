@@ -3,7 +3,7 @@ import numpy as np
 
 def main():
     # Inicializa a captura da webcam (0 é a câmera padrão)
-    cap = cv.VideoCapture(0, cv.CAP_DSHOW)
+    cap = cv.VideoCapture(0)
 
     if not cap.isOpened():
         print("Erro: Não foi possível acessar a webcam.")
