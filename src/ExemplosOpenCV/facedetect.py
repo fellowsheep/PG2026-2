@@ -37,7 +37,7 @@ def main():
    
     face_classifier = cv.CascadeClassifier(cv.data.haarcascades + "haarcascade_frontalface_default.xml")
     eye_classifier = cv.CascadeClassifier(cv.data.haarcascades + "haarcascade_eye.xml")   
-    create_capture = cv.VideoCapture(0)
+    create_capture = cv.VideoCapture('../../src/ExemplosOpenCV/rossana.mp4')
 
     while True:
         _ret, img = create_capture.read()

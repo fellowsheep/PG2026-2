@@ -3,7 +3,7 @@ import numpy as np
 
 def main():
     # Inicializa a captura da webcam (0 é a câmera padrão)
-    cap = cv.VideoCapture(0)
+    cap = cv.VideoCapture('../../src/ExemplosOpenCV/rossana.mp4')
 
     if not cap.isOpened():
         print("Erro: Não foi possível acessar a webcam.")
@@ -17,8 +17,10 @@ def main():
             print("Erro na captura do frame.")
             break
 
+        frame = cv.resize(frame, (800, 600), interpolation=cv.INTER_LINEAR)
+
         # Aplica o Gaussian Blur conforme mostrado no ExemploFiltrosConvolucao.py
-        frame_blur = cv.GaussianBlur(frame, (15, 15), 1.5)
+        frame_blur = cv.GaussianBlur(frame, (5, 5), 1.5)
         
         # Aplica detecção de bordas de Canny
         frame_canny = cv.Canny(frame_blur, 100, 150)

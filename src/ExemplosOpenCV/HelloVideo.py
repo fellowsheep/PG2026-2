@@ -3,8 +3,9 @@ import numpy as np
 
 def main():
     # Caminho para o vídeo 
-    cap = cv.VideoCapture('../../src/ExemplosOpenCV/Human_Kidney_Ultrasound_Scan.ogg')
-
+    #cap = cv.VideoCapture('../../src/ExemplosOpenCV/Human_Kidney_Ultrasound_Scan.ogg')
+    cap = cv.VideoCapture('../../src/ExemplosOpenCV/Fetal_cataract.ogg')
+    
     if not cap.isOpened():
         print("Erro: Não foi possível acessar o arquivo de vídeo.")
         return
@@ -31,15 +32,24 @@ def main():
         frame_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
         # 2. Suavização (Blur) para reduzir o ruído de Speckle clássico de ultrassom
-        frame_blur = cv.GaussianBlur(frame_gray, (3, 3), 0)
+        # frame_blur = cv.GaussianBlur(frame_gray, (3, 3), 0)
+
+        # 2.
+        # Filtro para aumento de nitidez (sharpening)
+        kernel = np.array([[ 0, -1, 0],
+                   [-1, 5, -1],
+                   [0, -1, 0]])
+
+        img_sharpen = cv.filter2D(frame,-1,kernel)
         
         # 3. Realce das bordas com Laplaciano (ajuda a ver contornos de tecidos)
-        laplaciano = cv.Laplacian(frame_blur, cv.CV_64F)
+        laplaciano = cv.Laplacian(img_sharpen, cv.CV_64F)
         # Converte de volta para uint8 para exibição correta
         laplaciano_exibicao = cv.convertScaleAbs(laplaciano)
 
         cv.imshow('Exame Original (Modo Video)', frame_gray)
-        cv.imshow('Exame Suavizado (Sem ruido)', frame_blur)
+        #cv.imshow('Exame Suavizado (Sem ruido)', frame_blur)
+        cv.imshow('Exame com realce (nitidez)', img_sharpen)
         cv.imshow('Realce de Bordas (Laplaciano)', laplaciano_exibicao)
 
         # Usa o delay calculado a partir do FPS do vídeo original

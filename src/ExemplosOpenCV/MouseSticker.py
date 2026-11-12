@@ -1,3 +1,5 @@
+# Leitura sugerida: https://docs.opencv.org/4.13.0/d0/d86/tutorial_py_image_arithmetics.html
+
 import cv2 as cv
 import numpy as np
 
@@ -48,7 +50,9 @@ def main():
     
     # ATENÇÃO ALUNOS: A flag IMREAD_UNCHANGED é obrigatória para não perder o canal Alfa (4º canal)
     sticker_img = cv.imread('../../src/ExemplosOpenCV/sticker.png', cv.IMREAD_UNCHANGED)
-
+    # sticker_img = cv.imread('../../src/ExemplosOpenCV/eyeglasses.png', cv.IMREAD_UNCHANGED)
+    #sticker_img = cv.resize(sticker_img, (250, 100), interpolation=cv.INTER_LINEAR)
+   
     if img is None or sticker_img is None:
         print("Erro: Imagem de fundo ou sticker não encontrados.")
         return
