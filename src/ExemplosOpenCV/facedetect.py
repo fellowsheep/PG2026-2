@@ -1,14 +1,28 @@
-# 20/11/2023 - Atualizei o código me baseando em:
-# https://www.datacamp.com/tutorial/face-detection-python-opencv 
+"""
+=============================================================================
+Exemplo de Detecção de Faces e Olhos usando Haar Cascades (OpenCV)
+=============================================================================
 
-#!/usr/bin/env python
+Este script demonstra a detecção clássica de objetos utilizando Classificadores 
+em Cascata de Haar (Haar Cascades). 
 
-'''
-face detection using haar cascades
+NOTA IMPORTANTE SOBRE O AMBIENTE (OpenCV 5+):
+Nas versões mais recentes do OpenCV (OpenCV 5 e superiores), o pacote padrão 
+('opencv-python') removeu o suporte nativo aos classificadores Haar e a classe 
+'CascadeClassifier' do módulo principal. 
 
-USAGE:
+Para que este script funcione corretamente:
+1. Certifique-se de instalar o pacote de contribuição:
+   pip install opencv-contrib-python
+   
+2. Os arquivos XML dos classificadores (como 'haarcascade_frontalface_default.xml') 
+   não vêm mais embutidos por padrão. Eles devem ser mantidos localmente na 
+   pasta do seu projeto (ou baixados diretamente do repositório oficial do OpenCV).
+
+USO:
     facedetect.py [--cascade <cascade_fn>] [--nested-cascade <cascade_fn>] [<video_source>]
-'''
+=============================================================================
+"""
 
 # Python 2/3 compatibility
 from __future__ import print_function
@@ -33,10 +47,12 @@ def draw_rects(img, rects, color):
         cv.rectangle(img, (x1, y1), (x2, y2), color, 2)
 
 def main():
+
+    print(cv.__version__)
     
-   
-    face_classifier = cv.CascadeClassifier(cv.data.haarcascades + "haarcascade_frontalface_default.xml")
-    eye_classifier = cv.CascadeClassifier(cv.data.haarcascades + "haarcascade_eye.xml")   
+    # coloquei os haarcascades em pasta local
+    face_classifier = cv.CascadeClassifier("../../src/ExemplosOpenCV/haarcascades/haarcascade_frontalface_default.xml")
+    eye_classifier = cv.CascadeClassifier("../../src/ExemplosOpenCV/haarcascades/haarcascade_eye.xml")   
     create_capture = cv.VideoCapture('../../src/ExemplosOpenCV/rossana.mp4')
 
     while True:
